@@ -1,0 +1,45 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0x5fbf00
+ addUserKnob {20 Settings}
+ addUserKnob {20 Diffuse n 1}
+ addUserKnob {18 m_frontColor_color l "Front color"}
+ m_frontColor_color 0.18
+ addUserKnob {6 m_frontColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_backColor_color l "Back color"}
+ m_backColor_color 0.18
+ addUserKnob {6 m_backColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_roughness_float l Roughness}
+ addUserKnob {18 m_sheen_color l Sheen}
+ addUserKnob {6 m_sheen_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_translucence_float l Translucence}
+ addUserKnob {18 m_incandescence_color l Incandescence}
+ addUserKnob {6 m_incandescence_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_bumpNormal_normal l "Bump normal"}
+ addUserKnob {6 m_bumpNormal_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Misc n 1}
+ Misc 0
+ addUserKnob {7 m_presence_float l Presence}
+ m_presence_float 1
+ addUserKnob {3 m_inputAOV_int l "Input AOV"}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T shader}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T PxrLMDiffuse}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group

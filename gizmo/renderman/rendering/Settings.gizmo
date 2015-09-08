@@ -1,0 +1,71 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0xb2334cff
+ addUserKnob {20 General}
+ addUserKnob {1 m_pass_camera_name_string l "Camera name"}
+ m_pass_camera_name_string perspShape
+ addUserKnob {15 m_CropWindow_bb l "Crop window"}
+ m_CropWindow_bb {0 1 0 1}
+ addUserKnob {26 ""}
+ addUserKnob {3 m_minsamples_int l "Min samples"}
+ addUserKnob {3 m_maxsamples_int l "Max samples"}
+ m_maxsamples_int 512
+ addUserKnob {7 m_PixelVariance_float l "Pixel variance"}
+ m_PixelVariance_float 0.005
+ addUserKnob {26 ""}
+ addUserKnob {3 m_maxPathLength_int l "Max path length"}
+ m_maxPathLength_int 10
+ addUserKnob {3 m_numLightSamples_int l "num light samples"}
+ m_numLightSamples_int 8
+ addUserKnob {3 m_numBxdfSamples_int l "num bxdf samples"}
+ m_numBxdfSamples_int 8
+ addUserKnob {3 m_numIndirectSamples_int l "num indirect samples"}
+ m_numIndirectSamples_int 1
+ addUserKnob {6 m_allowCaustics_int l "Allow Caustics" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {3 m_maxdiffusedepth_int l "Max diffuse depth"}
+ m_maxdiffusedepth_int 1
+ addUserKnob {3 m_maxspeculardepth_int l "Max specular depth"}
+ m_maxspeculardepth_int 2
+ addUserKnob {20 Output}
+ addUserKnob {14 m_Format_int l "Format (px)" R 0 100}
+ m_Format_int {1920 1080}
+ addUserKnob {7 m_formatMultiplier_float l "Format multiplier"}
+ m_formatMultiplier_float 1
+ addUserKnob {7 m_pixelRatio_float l "Pixel ratio"}
+ m_pixelRatio_float 1
+ addUserKnob {26 ""}
+ addUserKnob {4 m_filter_string M {blackman-harris gaussian mitchell}}
+ addUserKnob {14 m_filterwidth_int l "Filter width" R 0 100}
+ m_filterwidth_int 3
+ addUserKnob {20 Advanced}
+ addUserKnob {4 m_order_string l "Bucket order" M {horizontal vertical zigzag-x zigzag-y spiral spacefill}}
+ addUserKnob {7 m_minwidth_float l "Min width"}
+ m_minwidth_float 0.5
+ addUserKnob {26 ""}
+ addUserKnob {3 m_texturememory_int l "Texture cache"}
+ m_texturememory_int 2097152
+ addUserKnob {3 m_geocachememory_int l "Geometry cache"}
+ m_geocachememory_int 2097152
+ addUserKnob {3 m_proceduralmemory_int l "Procedural cache"}
+ addUserKnob {3 m_opacitycachememory_int l "Opacity cache"}
+ m_opacitycachememory_int 1024000
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T settings}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T globals}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group

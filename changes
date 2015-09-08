@@ -1,0 +1,38 @@
+
+# 0.0.0.1
+==========
+
+Requires
+-----------------------------------------------------------------------
+Forge_0.0.0.1
+Anvil_0.0.0.1
+Hammer_0.0.0.1
+
+core
+-----------------------------------------------------------------------
+
+- Added : ./rendermanScene.py
+
+
+actions
+-----------------------------------------------------------------------
+
+- Added : ./BaseAction.py
+- Added : ./DipatchRender.py
+
+
+gizmo
+-----------------------------------------------------------------------
+
+- Added : ./renderman/shading/PxrDisney.gizmo
+- Added : ./renderman/rendering/Preview.gizmo
+- Added : ./renderman/rendering/ReadRib.gizmo
+- Added : ./renderman/rendering/Render.gizmo
+- Added : ./renderman/rendering/Settings.gizmo
+
+
+user
+-----------------------------------------------------------------------
+
+- Added : ./init.py
+- Added : ./menu.py

@@ -1,0 +1,92 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0x5fbf00
+ addUserKnob {20 Settings}
+ addUserKnob {20 Subsurface n 1}
+ addUserKnob {18 m_nearColor_color l "Near color"}
+ m_nearColor_color 1
+ addUserKnob {6 m_nearColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_nearWeight_float l "Near weight"}
+ m_nearWeight_float 0.13
+ addUserKnob {7 m_nearLength_float l "Near length"}
+ m_nearLength_float 0.8
+ addUserKnob {18 m_midColor_color l "Mid color"}
+ m_midColor_color {1 1 0.3}
+ addUserKnob {6 m_midColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_midWeight_float l "Mid weight"}
+ m_midWeight_float 0.27
+ addUserKnob {7 m_midLength_float l "Mid length"}
+ m_midLength_float 2.5
+ addUserKnob {18 m_farColor_color l "Far color"}
+ m_farColor_color {1 0 0}
+ addUserKnob {6 m_farColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_farWeight_float l "Far weight"}
+ m_farWeight_float 0.4
+ addUserKnob {7 m_farLength_float l "Far length"}
+ m_farLength_float 5
+ addUserKnob {7 m_unitLength_float l "Unit length"}
+ m_unitLength_float 0.1
+ addUserKnob {6 m_indirectAtSSS_int l "Indirect at SSS" +STARTLINE}
+ addUserKnob {18 m_bumpNormal_normal l "Bump normal"}
+ addUserKnob {6 m_bumpNormal_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 m_continuationRays_int l "Continuation rays" +STARTLINE}
+ addUserKnob {6 m_followTopology_float l "Follow topology" +STARTLINE}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Specular n 1}
+ Specular 0
+ addUserKnob {18 m_specularColor_color l "Specular color"}
+ addUserKnob {6 m_specularColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_specularRoughness_float l "Specular roughness"}
+ m_specularRoughness_float 0.1
+ addUserKnob {7 m_specularAnisotropy_float l "Specular anisotropy"}
+ addUserKnob {18 m_specularEta_color l "Specular eta"}
+ m_specularEta_color 1.5
+ addUserKnob {6 m_specularEta_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_specularNn_normal l "Bump normal"}
+ addUserKnob {6 m_specularNn_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_specularTn_vector l "Shading tangent"}
+ addUserKnob {6 m_specularTn_vector_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 Clearcoat n 1}
+ Clearcoat 0
+ addUserKnob {18 m_clearcoatColor_color l "Clearcoat color"}
+ addUserKnob {6 m_clearcoatColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_clearcoatRoughness_float l "Clearcoat roughness"}
+ m_clearcoatRoughness_float 0.05
+ addUserKnob {7 m_clearcoatAnisotropy_float l "Clearcoat anisotropy"}
+ addUserKnob {7 m_clearcoatEta_float l "Clearcoat eta"}
+ m_clearcoatEta_float 1.8
+ addUserKnob {7 m_clearcoatThickness_float l "Clearcoat thickness"}
+ addUserKnob {18 m_clearcoatTransmission_color l "Clearcoat transmission"}
+ m_clearcoatTransmission_color 1
+ addUserKnob {6 m_clearcoatTransmission_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_clearcoatNn_normal l "Bump normal"}
+ addUserKnob {6 m_clearcoatNn_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_clearcoatTn_vector l "Shading tangent"}
+ addUserKnob {6 m_clearcoatTn_vector_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 Misc n 1}
+ Misc 0
+ addUserKnob {7 m_presence_float l Presence}
+ m_presence_float 1
+ addUserKnob {3 m_inputAOV_int l "Input AOV"}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T shader}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T PxrLMSubsurface}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group

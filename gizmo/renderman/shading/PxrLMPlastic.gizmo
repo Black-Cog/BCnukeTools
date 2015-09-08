@@ -1,0 +1,81 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0x5fbf00
+ addUserKnob {20 Settings}
+ addUserKnob {20 Diffuse n 1}
+ addUserKnob {18 m_diffuseColor_color l "Diffuse color"}
+ m_diffuseColor_color 0.18
+ addUserKnob {6 m_diffuseColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_diffuseRoughness_float l "Diffuse roughness"}
+ addUserKnob {7 m_translucence_float l Translucence}
+ addUserKnob {18 m_sheen_color l Sheen}
+ addUserKnob {6 m_sheen_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_incandescence_color l Incandescence}
+ addUserKnob {6 m_incandescence_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_diffuseNn_normal l "Bump normal"}
+ addUserKnob {6 m_diffuseNn_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Specular n 1}
+ addUserKnob {18 m_specularColor_color l "Specular color"}
+ m_specularColor_color 0.5
+ addUserKnob {6 m_specularColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_specularRoughness_float l "Specular roughness"}
+ m_specularRoughness_float 0.1
+ addUserKnob {7 m_specularAnisotropy_float l "Specular anisotropy"}
+ addUserKnob {18 m_specularEta_color l "Specular eta"}
+ m_specularEta_color 1.5
+ addUserKnob {6 m_specularEta_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_specularNn_normal l "Bump normal"}
+ m_specularNn_normal {0 0 0}
+ addUserKnob {6 m_specularNn_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_specularTn_vector l "Shading tangent"}
+ m_specularTn_vector {0 0 0}
+ addUserKnob {6 m_specularTn_vector_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 Clearcoat n 1}
+ Clearcoat 0
+ addUserKnob {18 m_clearcoatColor_color l "Clearcoat color"}
+ m_clearcoatColor_color {0 0 0}
+ addUserKnob {6 m_clearcoatColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_clearcoatRoughness_float l "Clearcoat roughness"}
+ m_clearcoatRoughness_float 0.05
+ addUserKnob {7 m_clearcoatAnisotropy_float l "Clearcoat anisotropy"}
+ addUserKnob {7 m_clearcoatEta_float l "Clearcoat eta"}
+ m_clearcoatEta_float 1.8
+ addUserKnob {7 m_clearcoatThickness_float l "Clearcoat thickness"}
+ addUserKnob {18 m_clearcoatTransmission_color l "Clearcoat transmission"}
+ m_clearcoatTransmission_color 1
+ addUserKnob {6 m_clearcoatTransmission_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_clearcoatNn_normal l "Bump normal"}
+ m_clearcoatNn_normal {0 0 0}
+ addUserKnob {6 m_clearcoatNn_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_clearcoatTn_vector l "Shading tangent"}
+ m_clearcoatTn_vector {0 0 0}
+ addUserKnob {6 m_clearcoatTn_vector_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 Misc n 1}
+ Misc 0
+ addUserKnob {7 m_presence_float l Presence}
+ m_presence_float 1
+ addUserKnob {3 m_inputAOV_int l "Input AOV"}
+ addUserKnob {6 m_sampleLightEmission_int l "Sample light emission" +STARTLINE}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T shader}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T PxrLMPlastic}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group

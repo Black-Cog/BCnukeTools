@@ -1,0 +1,14 @@
+
+== BCnukeTools ==
+
+BCnukeTools is a tool library made for CG productions.
+
+=== Downloading ===
+Compiled binary releases are available for download from the https://github.com/Black-Cog/BCnukeTools/releases[releases page].
+
+=== Building ===
+
+You need to execute this file : ./install.bat
+
+=== Copyright and License ===
+© 2015, Black Cog. © 2014, Cedric Launay under https://github.com/Black-Cog/BCnukeTools/blob/master/LICENSE[the BSD license]

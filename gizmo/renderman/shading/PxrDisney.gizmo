@@ -1,0 +1,58 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0x5fbf00
+ addUserKnob {20 Settings}
+ addUserKnob {18 m_baseColor_color l "Diffuse albedo"}
+ m_baseColor_color 0.18
+ addUserKnob {6 m_baseColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_emitColor_color l Incandescence}
+ m_emitColor_color 0
+ addUserKnob {6 m_emitColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {18 m_subsurfaceColor_color l "SSS albedo"}
+ m_subsurfaceColor_color 0.18
+ addUserKnob {6 m_subsurfaceColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_subsurface_float l "SSS gain"}
+ addUserKnob {26 ""}
+ addUserKnob {7 m_metallic_float l Metallic}
+ addUserKnob {7 m_specular_float l "Specular gain"}
+ m_specular_float 0.5
+ addUserKnob {7 m_specularTint_float l "Specular Tint"}
+ addUserKnob {7 m_roughness_float l "Specular roughness"}
+ m_roughness_float 0.25
+ addUserKnob {7 m_anisotropic_float l "Specular anisotropic"}
+ addUserKnob {26 ""}
+ addUserKnob {7 m_sheen_float l Sheen}
+ addUserKnob {7 m_sheenTint_float l "Sheen Tint"}
+ m_sheenTint_float 0.5
+ addUserKnob {26 ""}
+ addUserKnob {7 m_clearcoat_float l Clearcoat}
+ addUserKnob {7 m_clearcoatGloss_float l "Clearcoat gloss"}
+ m_clearcoatGloss_float 0.9
+ addUserKnob {26 ""}
+ addUserKnob {18 m_bumpNormal_normal l "Bump Normal"}
+ m_bumpNormal_normal 0
+ addUserKnob {6 m_bumpNormal_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {7 m_presence_float l Presence}
+ m_presence_float 1
+ addUserKnob {3 m_inputAOV_int l "Input AOV"}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T shader}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T PxrDisney}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group

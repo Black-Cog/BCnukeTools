@@ -1,0 +1,46 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0x5fbf00
+ addUserKnob {20 Settings}
+ addUserKnob {6 m_thin_int l Thin +STARTLINE}
+ addUserKnob {7 m_eta_float l eta}
+ m_eta_float 1.3
+ addUserKnob {18 m_reflectionColor_color l "Reflection color"}
+ m_reflectionColor_color 1
+ addUserKnob {6 m_reflectionColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_refractionColor_color l "Refraction color"}
+ m_refractionColor_color 1
+ addUserKnob {6 m_refractionColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 m_roughness_float l roughness}
+ m_roughness_float 0.01
+ addUserKnob {7 m_absorption_float l absorption}
+ addUserKnob {18 m_transmissionColor_color l "Transmission color"}
+ m_transmissionColor_color 0.5
+ addUserKnob {6 m_transmissionColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 m_shadows_int l "Shadows thin" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {18 m_bumpNormal_normal l "Bump Normal"}
+ addUserKnob {6 m_bumpNormal_normal_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {7 m_presence_float l Presence}
+ m_presence_float 1
+ addUserKnob {3 m_inputAOV_int l "Input AOV"}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T shader}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T PxrLMGlass}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group
