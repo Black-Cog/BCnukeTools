@@ -1,0 +1,38 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ inputs 3
+ tile_color 0xbfbf00
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T settings}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T assignMaterial}
+}
+ Input {
+  inputs 0
+  name scene
+  xpos 188
+  ypos -241
+ }
+ Output {
+  name Output1
+  xpos 188
+  ypos -106
+ }
+ Input {
+  inputs 0
+  name material
+  xpos 26
+  ypos -242
+  number 1
+ }
+ Input {
+  inputs 0
+  name filter
+  selected true
+  xpos 340
+  ypos -242
+  number 2
+ }
+end_group

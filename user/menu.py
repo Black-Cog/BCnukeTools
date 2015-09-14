@@ -85,6 +85,29 @@ shadingMenu.addCommand(
                             icon='%srender_PxrVolume.png' %(iconsPath),
                         )
 
+# prman lighting
+lightingMenu = prmanMenu.addMenu( "Lighting", icon='%srender_RenderManLight.png' %(iconsPath) )
+lightingMenu.addCommand(
+                            "AreaLight",
+                            "nuke.createNode('%srenderman/lighting/AreaLight.gizmo')" %(gizmoPath),
+                            icon='%srender_RMSAreaLight.png' %(iconsPath),
+                        )
+lightingMenu.addCommand(
+                            "DistantLight",
+                            "nuke.createNode('%srenderman/lighting/DistantLight.gizmo')" %(gizmoPath),
+                            icon='%srender_RenderManLight.png' %(iconsPath),
+                        )
+lightingMenu.addCommand(
+                            "SpotLight",
+                            "nuke.createNode('%srenderman/lighting/SpotLight.gizmo')" %(gizmoPath),
+                            icon='%srender_RenderManLight.png' %(iconsPath),
+                        )
+lightingMenu.addCommand(
+                            "EnvironnementLight",
+                            "nuke.createNode('%srenderman/lighting/EnvironnementLight.gizmo')" %(gizmoPath),
+                            icon='%srender_RMSEnvLight.png' %(iconsPath),
+                        )
+
 # prman rendering
 renderingMenu = prmanMenu.addMenu( "Rendering", icon='%srman_render.png' %(iconsPath) )
 renderingMenu.addCommand(
@@ -111,4 +134,14 @@ renderingMenu.addCommand(
                             "Renderpass",
                             "nuke.createNode('%srenderman/rendering/Renderpass.gizmo')" %(gizmoPath),
                             icon='%srman_render_options.png' %(iconsPath),
+                        )
+renderingMenu.addCommand(
+                            "RenderCamera",
+                            "nuke.createNode('%srenderman/rendering/RenderCamera.gizmo')" %(gizmoPath),
+                            icon='%sRenderCamera.png' %(iconsPath),
+                        )
+renderingMenu.addCommand(
+                            "AssignMaterial",
+                            "nuke.createNode('%srenderman/rendering/AssignMaterial.gizmo')" %(gizmoPath),
+                            icon='%sAssignMaterial.png' %(iconsPath),
                         )

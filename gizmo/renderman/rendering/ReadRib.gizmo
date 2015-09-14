@@ -4,12 +4,17 @@ Gizmo {
  inputs 0
  tile_color 0x35b27700
  addUserKnob {20 Settings}
+ addUserKnob {20 Transform n 1}
+ addUserKnob {41 translate T ReadGeo.translate}
+ addUserKnob {41 rotate T ReadGeo.rotate}
+ addUserKnob {41 scaling l scale T ReadGeo.scaling}
+ addUserKnob {41 matrix l INVISIBLE +INVISIBLE T ReadGeo.matrix}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Geometry n 1}
  addUserKnob {41 m_rib l RIB T ReadGeo.m_rib}
- addUserKnob {41 refresh T ReadGeo.refresh}
- addUserKnob {20 "" l Scenegraph}
- addUserKnob {41 scene_view l "" -STARTLINE T ReadGeo.scene_view}
- addUserKnob {26 "" l " "}
- addUserKnob {41 all_objects l "view entire scenegraph" T ReadGeo.all_objects}
+ addUserKnob {41 refresh -STARTLINE T ReadGeo.refresh}
+ addUserKnob {41 lock_frame l "Read frame" T ReadGeo.lock_frame}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
  addUserKnob {20 Info}
  addUserKnob {26 labelType l "" +STARTLINE T "type : "}
  addUserKnob {26 __type l "" -STARTLINE T geometry}
@@ -18,22 +23,17 @@ Gizmo {
 }
  ReadGeo2 {
   inputs 0
-  file F:/tmp/renderman/_lib/abc/dragon_001.abc
   version 1
-  read_on_each_frame true
-  use_geometry_colors false
-  translate {0 0 0.004999999888}
-  scene_view {{0} imported: 0 selected: 0 items: /root/dragon_001:default1/dragon_001:defaultShape}
+  range_last 10
+  rot_order XYZ
   name ReadGeo
   selected true
   xpos 0
-  ypos 212
+  ypos 213
   addUserKnob {20 Rendering}
   addUserKnob {2 m_rib l RIB}
-  m_rib F:/tmp/renderman/_lib/rib/dragon_001.rib
   addUserKnob {2 m_abc l abc}
-  m_abc F:/tmp/renderman/_lib/abc/dragon_001.abc
-  addUserKnob {22 refresh T "import nuke\n\nn = nuke.thisNode()\n\nn\['file'].setValue( n\['m_rib'].value().replace('rib', 'abc') )\nn\['m_abc'].setValue( n\['m_rib'].value().replace('rib', 'abc') )\n\n\n" +STARTLINE}
+  addUserKnob {22 refresh T "import nuke\n\nn = nuke.thisNode()\n\nabcPath = n\['m_rib'].value().replace('rib', 'abc')\nif '%04d.' in abcPath:\n    abcPath = abcPath.replace( '%04d.', '' )\n\nn\['file'].setValue(abcPath)\nn\['m_abc'].setValue(abcPath)\n\n\n\n" +STARTLINE}
  }
  Output {
   name Output1
