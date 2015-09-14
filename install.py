@@ -52,6 +52,7 @@ coreDir = 'core'
 actionsDir = 'actions'
 gizmoRendermanRenderingDir = 'gizmo/renderman/rendering'
 gizmoRendermanShadingDir = 'gizmo/renderman/shading'
+gizmoRendermanLightingDir = 'gizmo/renderman/lighting'
 iconsDir = 'icons'
 userDir = 'user'
 
@@ -62,6 +63,7 @@ for folder in 	[
 					actionsDir,
 					gizmoRendermanRenderingDir,
 					gizmoRendermanShadingDir,
+					gizmoRendermanLightingDir,
 					iconsDir,
 					userDir,
 				]:
@@ -80,6 +82,7 @@ for folder in 	[
 					actionsDir,
 					gizmoRendermanRenderingDir,
 					gizmoRendermanShadingDir,
+					gizmoRendermanLightingDir,
 					iconsDir,
 					userDir,
 				]:
