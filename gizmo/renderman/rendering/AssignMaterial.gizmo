@@ -5,7 +5,7 @@ Gizmo {
  tile_color 0xbfbf00
  addUserKnob {20 Info}
  addUserKnob {26 labelType l "" +STARTLINE T "type : "}
- addUserKnob {26 __type l "" -STARTLINE T settings}
+ addUserKnob {26 __type l "" -STARTLINE T assignMaterial}
  addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
  addUserKnob {26 __class l "" -STARTLINE T assignMaterial}
 }

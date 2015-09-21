@@ -4,7 +4,7 @@ Gizmo {
  tile_color 0xb2334cff
  note_font Verdana
  addUserKnob {20 Settings}
- addUserKnob {22 preview T "\nimport sys\nBCnukeToolsPath = 'f:/software/BCnukeTools_0.0.0.1dev'\nif not BCnukeToolsPath in sys.path:\n    sys.path.append( BCnukeToolsPath )\nimport BCnukeTools.actions\n\nBCnukeTools.actions.DipatchRender()\n\n" +STARTLINE}
+ addUserKnob {22 dispatch l preview T "\nimport sys\nBCnukeToolsPath = 'f:/software/BCnukeTools_0.0.0.1dev'\nif not BCnukeToolsPath in sys.path:\n    sys.path.append( BCnukeToolsPath )\nimport BCnukeTools.actions\n\nBCnukeTools.actions.DipatchRender()\n\n" +STARTLINE}
  addUserKnob {20 Info}
  addUserKnob {26 labelType l "" +STARTLINE T "type : "}
  addUserKnob {26 __type l "" -STARTLINE T dispatch}

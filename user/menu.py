@@ -126,6 +126,11 @@ renderingMenu.addCommand(
                             icon='%srman_render.png' %(iconsPath),
                         )
 renderingMenu.addCommand(
+                            "TaskList",
+                            "nuke.createNode('%srenderman/rendering/TaskList.gizmo')" %(gizmoPath),
+                            icon='%srman_render.png' %(iconsPath),
+                        )
+renderingMenu.addCommand(
                             "Settings",
                             "nuke.createNode('%srenderman/rendering/Settings.gizmo')" %(gizmoPath),
                             icon='%srman_render_options.png' %(iconsPath),
@@ -145,3 +150,14 @@ renderingMenu.addCommand(
                             "nuke.createNode('%srenderman/rendering/AssignMaterial.gizmo')" %(gizmoPath),
                             icon='%sAssignMaterial.png' %(iconsPath),
                         )
+renderingMenu.addCommand(
+                            "Attribute",
+                            "nuke.createNode('%srenderman/rendering/Attribute.gizmo')" %(gizmoPath),
+                            icon='%sAssignMaterial.png' %(iconsPath),
+                        )
+renderingMenu.addCommand(
+                            "Xpath",
+                            "nuke.createNode('%srenderman/rendering/Xpath.gizmo')" %(gizmoPath),
+                            icon='%sXpath.png' %(iconsPath),
+                        )
+
