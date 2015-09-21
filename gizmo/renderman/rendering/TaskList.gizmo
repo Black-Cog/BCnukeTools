@@ -1,22 +1,20 @@
 #! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
 version 8.0 v3
 Gizmo {
+ inputs 0
  tile_color 0xb2334cff
  note_font Verdana
  addUserKnob {20 Settings}
- addUserKnob {22 dispatch l render T "\nimport sys\nBCnukeToolsPath = 'f:/software/BCnukeTools_0.0.0.1dev'\nif not BCnukeToolsPath in sys.path:\n    sys.path.append( BCnukeToolsPath )\nimport BCnukeTools.actions\n\nBCnukeTools.actions.DipatchRender()\n\n" +STARTLINE}
+ addUserKnob {1 m_tasks_string l Tasks}
+ addUserKnob {22 dispatch T "\nimport sys\nBCnukeToolsPath = 'f:/software/BCnukeTools_0.0.0.1dev'\nif not BCnukeToolsPath in sys.path:\n    sys.path.append( BCnukeToolsPath )\nimport BCnukeTools.actions\n\nBCnukeTools.actions.DipatchRender()\n\n" +STARTLINE}
  addUserKnob {20 Info}
  addUserKnob {26 labelType l "" +STARTLINE T "type : "}
  addUserKnob {26 __type l "" -STARTLINE T dispatch}
  addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
- addUserKnob {26 __class l "" -STARTLINE T render}
+ addUserKnob {26 __class l "" -STARTLINE T taskList}
 }
- Input {
-  inputs 0
-  name Input1
-  xpos 0
- }
  Output {
+  inputs 0
   name Output1
   xpos 0
   ypos 300

@@ -38,21 +38,23 @@ def getLightTypeId(node):
     '@parameter node (Gizmo) Renderman node.'
     'return typeId (int)'
 
+    attr = 'm_rman__Shape_string'
     typeId = None
-    for attr in node.knobs().keys():
-        if attr == 'm_rman__Shape_string':
-            value = node[attr].value()
-            if value == 'env':
-                typeId = 0
-            if value == 'rect':
-                typeId = 1
-            if value in ['disk', 'spot']:
-                typeId = 2
-            if value == 'sphere':
-                typeId = 3
-            if value == 'distant':
-                typeId = 4
-            break
+
+    if attr in node.knobs().keys():
+        value = node[attr].value()
+        if value == 'rect':
+            typeId = 1
+        if value in ['disk', 'spot']:
+            typeId = 2
+        if value == 'sphere':
+            typeId = 3
+        if value == 'distant':
+            typeId = 4
+
+    else:
+        # env
+        typeId = 0
 
     return typeId
 
@@ -108,24 +110,122 @@ def getLightData( nodes ):
     return lightData
 
 
+def climbToNode( node, type ):
+    """define shading data base on shading nodes"""
+    '@parameter node (Gizmo) Node to start climbing.'
+    '@parameter type (str) Node type.'
+    'return first node with a matching type (Gizmo)'
+
+    if node:
+        if node and '__type' in node.knobs().keys() and node['__type'].value() == type:
+            return node
+
+        for i in range( node.inputs() ):
+            childNode = node.input(i)
+
+            if childNode and '__type' in childNode.knobs().keys() and childNode['__type'].value() == type:
+                return childNode
+
+    return None
+
+
 def getShadingData( nodes ):
     """define shading data base on shading nodes"""
     '@parameter nodes (list of Gizmo) List of shading nodes.'
     'return shading data (dict)'
     
-    shadingData = {}
+    shadingData = []
 
     for node in nodes:
-        nodeName = node.name()
-        nodeClass = node.knobs()['__class'].value()
+        shader = climbToNode( node.input(1), 'shader' )
+        xpath = climbToNode( node.input(2), 'xpath' )
 
-        settings = 'Bxdf "%s" "%s"' %( nodeClass, nodeName )
-        settings += getNodeAttr(node)
-        settings += ' "__instanceid" ["%s_0"]' %( nodeName )
+        if shader:
+            shaderName = shader.name()
+            shaderClass = shader.knobs()['__class'].value()
 
-        shadingData[nodeName] = {'class':nodeClass, 'rule':'', 'value':settings}
+            settings = 'Bxdf "%s" "%s"' %( shaderClass, shaderName )
+            settings += getNodeAttr(shader)
+            settings += ' "__instanceid" ["%s_0"]' %( shaderName )
+
+            rule = '/*'
+            if xpath:
+                rule = xpath['m_xpath_string'].getValue()
+
+            shadingData.append(
+                                {
+                                    'name':shaderName,
+                                    'class':shaderClass,
+                                    'rule':rule,
+                                    'value':settings
+                                }
+                                )
 
     return shadingData
+
+
+def getAttributeData( nodes ):
+    """define attribute data base on attribute nodes"""
+    '@parameter nodes (list of Gizmo) List of attribute nodes.'
+    'return attribute data (list)'
+    
+    attributeData = []
+
+    for node in nodes:
+        xpath = climbToNode( node.input(1), 'xpath' )
+
+        rule = '/*'
+
+        if xpath:
+            rule = xpath['m_xpath_string'].getValue()
+
+        # geometric
+        m_matte_int = node['m_matte_int'].value()
+        if m_matte_int == 'unchanged':
+            m_matte_int = None
+
+        m_side_int = node['m_side_int'].value()
+        if m_side_int == 'unchanged':
+            m_side_int = None
+
+
+        # visibility
+        m_visibility_camera_int = node['m_visibility_camera_int'].value()
+        if m_visibility_camera_int == 'unchanged':
+            m_visibility_camera_int = None
+
+        m_visibility_transmission_int = node['m_visibility_transmission_int'].value()
+        if m_visibility_transmission_int == 'unchanged':
+            m_visibility_transmission_int = None
+
+        m_visibility_indirect_int = node['m_visibility_indirect_int'].value()
+        if m_visibility_indirect_int == 'unchanged':
+            m_visibility_indirect_int = None
+
+
+        # trace
+        m_trace_maxdiffusedepth_int = node['m_trace_maxdiffusedepth_int'].value()
+        if m_trace_maxdiffusedepth_int == 'unchanged':
+            m_trace_maxdiffusedepth_int = None
+
+        m_trace_maxspeculardepth_int = node['m_trace_maxspeculardepth_int'].value()
+        if m_trace_maxspeculardepth_int == 'unchanged':
+            m_trace_maxspeculardepth_int = None
+
+        attributeData.append(
+                            {
+                                'rule':rule,
+                                'm_matte_int':m_matte_int,
+                                'm_side_int':m_side_int,
+                                'm_visibility_camera_int':m_visibility_camera_int,
+                                'm_visibility_transmission_int':m_visibility_transmission_int,
+                                'm_visibility_indirect_int':m_visibility_indirect_int,
+                                'm_trace_maxdiffusedepth_int':m_trace_maxdiffusedepth_int,
+                                'm_trace_maxspeculardepth_int':m_trace_maxspeculardepth_int,
+                            }
+                        )
+
+    return attributeData
 
 
 def getGeometryData( nodes ):
@@ -236,37 +336,19 @@ def getGlobalsVariablesData( dispatcher, renderpass ):
     return globalsVariables
 
 
-def getRenderData( nodes ):
-    """define render data base on render nodes"""
-    '@parameter nodes (dict) Nodes to render.'
-    'return render data (dict)'
-    
-    renderData = { 'globals':{}, 'rlf':{}, 'data':{} }
-    renderData['globals']['settings'] = getGlobalsSettingsData( nodes['settings'] )
-    renderData['globals']['variables'] = getGlobalsVariablesData( nodes['dispatch'], nodes['renderpass'] )
-
-    renderData['rlf']['shading'] = getShadingData( nodes['shader'] )
-    renderData['rlf']['attribute'] = [{'class':'primaryOff', 'rule':'', 'value':'' }]
-
-    renderData['data']['object'] = getGeometryData( nodes['geometry'] )
-    renderData['data']['light'] = getLightData( nodes['light'] )
-    renderData['data']['camera'] = getCameraData( nodes['camera'] )
-
-    return renderData
-
-
 def getRenderNodes( node ):
     """define a render nodes dict based on a node type dispatch"""
     '@parameter node (Gizmo) Node to render.'
     'return render nodes (dict)'
 
     nodes = {}
-    nodes['shader'] = []
+    nodes['assignMaterial'] = []
     nodes['settings'] = []
     nodes['geometry'] = []
     nodes['renderpass'] = []
     nodes['camera'] = []
     nodes['light'] = []
+    nodes['attribute'] = []
 
     def climb( node ):
         if node:
@@ -276,11 +358,11 @@ def getRenderNodes( node ):
                 if childNode and '__type' in childNode.knobs().keys():
                     attrType = childNode['__type'].value()
 
-                    if attrType == 'shader':
-                        nodes['shader'].append(childNode)
-
-                    elif attrType == 'settings':
+                    if attrType == 'settings':
                         nodes['settings'].append(childNode)
+
+                    elif attrType == 'assignMaterial':
+                        nodes['assignMaterial'].append(childNode)
 
                     elif attrType == 'geometry':
                         nodes['geometry'].append(childNode)
@@ -294,6 +376,9 @@ def getRenderNodes( node ):
                     elif attrType == 'light':
                         nodes['light'].append(childNode)
 
+                    elif attrType == 'attribute':
+                        nodes['attribute'].append(childNode)
+
                 climb( childNode )
 
     if '__type' in node.knobs() and node.knobs()['__type'].value() == 'dispatch':
@@ -302,3 +387,21 @@ def getRenderNodes( node ):
     
     return nodes
 
+
+def getRenderData( nodes ):
+    """define render data base on render nodes"""
+    '@parameter nodes (dict) Nodes to render.'
+    'return render data (dict)'
+    
+    renderData = { 'globals':{}, 'rlf':{}, 'data':{} }
+    renderData['globals']['settings'] = getGlobalsSettingsData( nodes['settings'] )
+    renderData['globals']['variables'] = getGlobalsVariablesData( nodes['dispatch'], nodes['renderpass'] )
+
+    renderData['rlf']['shading'] = getShadingData( nodes['assignMaterial'] )
+    renderData['rlf']['attribute'] = getAttributeData(  nodes['attribute'] )
+
+    renderData['data']['object'] = getGeometryData( nodes['geometry'] )
+    renderData['data']['light'] = getLightData( nodes['light'] )
+    renderData['data']['camera'] = getCameraData( nodes['camera'] )
+
+    return renderData

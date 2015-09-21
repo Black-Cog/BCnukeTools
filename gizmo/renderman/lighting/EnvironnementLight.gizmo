@@ -13,12 +13,11 @@ Gizmo {
  addUserKnob {1 m___group_string l "Light group"}
  m___group_string environment
  addUserKnob {26 ""}
- addUserKnob {4 m_rman__Shape_string l INVISIBLE +INVISIBLE M {env}}
  addUserKnob {2 m_rman__EnvMap_string l Map}
  addUserKnob {7 m_exposure_float l Exposure}
- addUserKnob {18 m_lightColor_color l Tint}
- m_lightColor_color 1
- addUserKnob {6 m_lightColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 m_envTint_color l Tint}
+ m_envTint_color 1
+ addUserKnob {6 m_envTint_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  addUserKnob {18 m_shadowColor_color l "Shadow tint"}
  addUserKnob {6 m_shadowColor_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  addUserKnob {26 ""}

@@ -1,0 +1,42 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ inputs 2
+ tile_color 0x7f3f00
+ addUserKnob {20 Settings}
+ addUserKnob {20 Geometric n 1}
+ addUserKnob {68 m_matte_int l Matte M {unchanged 0 1}}
+ addUserKnob {68 m_side_int l Side M {unchanged 1 2}}
+ addUserKnob {20 Visibility n 1}
+ addUserKnob {68 m_visibility_camera_int l Camera M {unchanged 0 1}}
+ addUserKnob {68 m_visibility_transmission_int l Transmission M {unchanged 0 1}}
+ addUserKnob {68 m_visibility_indirect_int l Indirect M {unchanged 0 1}}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Trace n 1}
+ addUserKnob {68 m_trace_maxdiffusedepth_int l "Max diffuse depth" M {unchanged 0 1 2 3 4 5 6 7 8 9 10}}
+ addUserKnob {68 m_trace_maxspeculardepth_int l "Max specular depth" M {unchanged 0 1 2 3 4 5 6 7 8 9 10}}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T attribute}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T attribute}
+}
+ Input {
+  inputs 0
+  name scene
+  xpos 188
+  ypos -241
+ }
+ Output {
+  name Output1
+  xpos 188
+  ypos -106
+ }
+ Input {
+  inputs 0
+  name filter
+  xpos 325
+  ypos -239
+  number 1
+ }
+end_group
