@@ -120,13 +120,20 @@ def climbToNode( node, type ):
         if node and '__type' in node.knobs().keys() and node['__type'].value() == type:
             return node
 
-        for i in range( node.inputs() ):
-            childNode = node.input(i)
+        def climb( node, type ):
+            childNodes = [node.input(i) for i in range( node.inputs() )]
 
-            if childNode and '__type' in childNode.knobs().keys() and childNode['__type'].value() == type:
-                return childNode
+            if node.Class() == 'Group' and not '__type' in node.knobs().keys():
+                childNodes = [ node.output() ] + childNodes
 
-    return None
+            for childNode in childNodes:
+                if childNode and '__type' in childNode.knobs().keys() and childNode['__type'].value() == type:
+                    return childNode
+                else:
+                    return climb( childNode, type )
+
+        return climb( node, type )
+
 
 
 def getShadingData( nodes ):
@@ -352,8 +359,12 @@ def getRenderNodes( node ):
 
     def climb( node ):
         if node:
-            for i in range( node.inputs() ):
-                childNode = node.input(i)
+            childNodes = [node.input(i) for i in range( node.inputs() )]
+
+            if node.Class() == 'Group' and not '__type' in node.knobs().keys():
+                childNodes = [ node.output() ] + childNodes
+
+            for childNode in childNodes:
 
                 if childNode and '__type' in childNode.knobs().keys():
                     attrType = childNode['__type'].value()
