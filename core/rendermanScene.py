@@ -268,43 +268,59 @@ def getGlobalsSettingsData( nodes ):
     '@parameter nodes (list of Gizmo) List of globalsSettings nodes.'
     'return globalsSettings data (dict)'
     
-    globalsSettings = { 'render':{}, 'display':{} }
-    # todo : be able to manage multiple settings node
-    node = nodes[0]
+    globalsSettings = { 'render':{}, 'display':{'channels':[None]} }
 
-    formatObj = node['m_Format_int'].value()
-    if not isinstance( formatObj, list ):
-        formatObj = [formatObj, formatObj]
-    formatObj = [ int( i*node['m_formatMultiplier_float'].value() ) for i in formatObj ]
-    formatObj.append( node['m_pixelRatio_float'].value() )
+    nodes.reverse()
+    for node in nodes:
+        if node['__class'].value() == 'globals':
+            formatObj = node['m_Format_int'].value()
+            if not isinstance( formatObj, list ):
+                formatObj = [formatObj, formatObj]
+            formatObj = [ int( i*node['m_formatMultiplier_float'].value() ) for i in formatObj ]
+            formatObj.append( node['m_pixelRatio_float'].value() )
 
-    globalsSettings['render']['Format'] = formatObj
-    globalsSettings['render']['pass_camera_name'] = node['m_pass_camera_name_string'].value()
-    globalsSettings['render']['CropWindow'] = list( node['m_CropWindow_bb'].value() )
-    globalsSettings['render']['minsamples'] = int( node['m_minsamples_int'].value() )
-    globalsSettings['render']['maxsamples'] = int( node['m_maxsamples_int'].value() )
-    globalsSettings['render']['PixelVariance'] = node['m_PixelVariance_float'].value()
-    globalsSettings['render']['maxPathLength'] = int( node['m_maxPathLength_int'].value() )
-    globalsSettings['render']['numLightSamples'] = int( node['m_numLightSamples_int'].value() )
-    globalsSettings['render']['numBxdfSamples'] = int( node['m_numBxdfSamples_int'].value() )
-    globalsSettings['render']['numIndirectSamples'] = int( node['m_numIndirectSamples_int'].value() )
-    globalsSettings['render']['allowCaustics'] = int( node['m_allowCaustics_int'].value() )
-    globalsSettings['render']['maxdiffusedepth'] = int( node['m_maxdiffusedepth_int'].value() )
-    globalsSettings['render']['maxspeculardepth'] = int( node['m_maxspeculardepth_int'].value() )
-    globalsSettings['render']['order'] = node['m_order_string'].value()
-    globalsSettings['render']['minwidth'] = node['m_minwidth_float'].value()
-    globalsSettings['render']['texturememory'] = int( node['m_texturememory_int'].value() )
-    globalsSettings['render']['geocachememory'] = int( node['m_geocachememory_int'].value() )
-    globalsSettings['render']['proceduralmemory'] = int( node['m_proceduralmemory_int'].value() )
-    globalsSettings['render']['opacitycachememory'] = int( node['m_opacitycachememory_int'].value() )
+            globalsSettings['render']['Format'] = formatObj
+            globalsSettings['render']['pass_camera_name'] = node['m_pass_camera_name_string'].value()
+            globalsSettings['render']['CropWindow'] = list( node['m_CropWindow_bb'].value() )
+            globalsSettings['render']['minsamples'] = int( node['m_minsamples_int'].value() )
+            globalsSettings['render']['maxsamples'] = int( node['m_maxsamples_int'].value() )
+            globalsSettings['render']['PixelVariance'] = node['m_PixelVariance_float'].value()
+            globalsSettings['render']['maxPathLength'] = int( node['m_maxPathLength_int'].value() )
+            globalsSettings['render']['numLightSamples'] = int( node['m_numLightSamples_int'].value() )
+            globalsSettings['render']['numBxdfSamples'] = int( node['m_numBxdfSamples_int'].value() )
+            globalsSettings['render']['numIndirectSamples'] = int( node['m_numIndirectSamples_int'].value() )
+            globalsSettings['render']['allowCaustics'] = int( node['m_allowCaustics_int'].value() )
+            globalsSettings['render']['maxdiffusedepth'] = int( node['m_maxdiffusedepth_int'].value() )
+            globalsSettings['render']['maxspeculardepth'] = int( node['m_maxspeculardepth_int'].value() )
+            globalsSettings['render']['order'] = node['m_order_string'].value()
+            globalsSettings['render']['minwidth'] = node['m_minwidth_float'].value()
+            globalsSettings['render']['texturememory'] = int( node['m_texturememory_int'].value() )
+            globalsSettings['render']['geocachememory'] = int( node['m_geocachememory_int'].value() )
+            globalsSettings['render']['proceduralmemory'] = int( node['m_proceduralmemory_int'].value() )
+            globalsSettings['render']['opacitycachememory'] = int( node['m_opacitycachememory_int'].value() )
+
+            filterwidthObj = node['m_filterwidth_int'].value()
+            if not isinstance( filterwidthObj, list):
+                filterwidthObj = [filterwidthObj, filterwidthObj]
+
+            globalsSettings['display']['filter'] = node['m_filter_string'].value()
+            globalsSettings['display']['filterwidth'] = filterwidthObj
+
+    for node in nodes:
+        if node['__class'].value() == 'aov':
+            for attr in node.knobs().keys():
+                if 'm_aov_name_' in attr and attr.getText():
+                    count = attr.split('_')[-1]
+                    channel = {
+                                'label'       : node['m_aov_name_%s'  %(count)].getText().replace('lpe:', ''),
+                                'name'        : node['m_aov_name_%s'  %(count)].getText(),
+                                'lpe'         : node['m_aov_lpe_%s'   %(count)].getText(),
+                                'type'        : node['m_aov_depth_%s' %(count)].value(),
+                                }        
+                    globalsSettings['display']['channels'].append( channel )
 
 
-    filterwidthObj = node['m_filterwidth_int'].value()
-    if not isinstance( filterwidthObj, list):
-        filterwidthObj = [filterwidthObj, filterwidthObj]
-
-    globalsSettings['display']['filter'] = node['m_filter_string'].value()
-    globalsSettings['display']['filterwidth'] = filterwidthObj
+    globalsSettings['display']['channels'][0] = {'label':'beauty', 'name':'rgba','lpe':'','type':'half'}
 
     return globalsSettings
 

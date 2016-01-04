@@ -136,6 +136,11 @@ renderingMenu.addCommand(
                             icon='%srman_render_options.png' %(iconsPath),
                         )
 renderingMenu.addCommand(
+                            "AOV",
+                            "nuke.createNode('%srenderman/rendering/Aov.gizmo')" %(gizmoPath),
+                            icon='%srman_render_options.png' %(iconsPath),
+                        )
+renderingMenu.addCommand(
                             "Renderpass",
                             "nuke.createNode('%srenderman/rendering/Renderpass.gizmo')" %(gizmoPath),
                             icon='%srman_render_options.png' %(iconsPath),
