@@ -117,8 +117,9 @@ def climbToNode( node, type ):
     'return first node with a matching type (Gizmo)'
 
     if node:
-        if node and '__type' in node.knobs().keys() and node['__type'].value() == type:
-            return node
+        if '__type' in node.knobs().keys() and node['__type'].value() == type:
+            if not 'disable' in node.knobs().keys() or 'disable' in node.knobs().keys() and not node['disable'].value():
+                return node
 
         def climb( node, type ):
             childNodes = [node.input(i) for i in range( node.inputs() )]
@@ -128,9 +129,9 @@ def climbToNode( node, type ):
 
             for childNode in childNodes:
                 if childNode and '__type' in childNode.knobs().keys() and childNode['__type'].value() == type:
-                    return childNode
-                else:
-                    return climb( childNode, type )
+                    if not 'disable' in childNode.knobs().keys() or 'disable' in childNode.knobs().keys() and not childNode['disable'].value():
+                        return childNode
+                return climb( childNode, type )
 
         return climb( node, type )
 
@@ -383,28 +384,29 @@ def getRenderNodes( node ):
             for childNode in childNodes:
 
                 if childNode and '__type' in childNode.knobs().keys():
-                    attrType = childNode['__type'].value()
+                    if not 'disable' in childNode.knobs().keys() or 'disable' in childNode.knobs().keys() and not childNode['disable'].value():
+                        attrType = childNode['__type'].value()
 
-                    if attrType == 'settings':
-                        nodes['settings'].append(childNode)
+                        if attrType == 'settings':
+                            nodes['settings'].append(childNode)
 
-                    elif attrType == 'assignMaterial':
-                        nodes['assignMaterial'].append(childNode)
+                        elif attrType == 'assignMaterial':
+                            nodes['assignMaterial'].append(childNode)
 
-                    elif attrType == 'geometry':
-                        nodes['geometry'].append(childNode)
+                        elif attrType == 'geometry':
+                            nodes['geometry'].append(childNode)
 
-                    elif attrType == 'renderpass':
-                        nodes['renderpass'].append(childNode)
+                        elif attrType == 'renderpass':
+                            nodes['renderpass'].append(childNode)
 
-                    elif attrType == 'camera':
-                        nodes['camera'].append(childNode)
+                        elif attrType == 'camera':
+                            nodes['camera'].append(childNode)
 
-                    elif attrType == 'light':
-                        nodes['light'].append(childNode)
+                        elif attrType == 'light':
+                            nodes['light'].append(childNode)
 
-                    elif attrType == 'attribute':
-                        nodes['attribute'].append(childNode)
+                        elif attrType == 'attribute':
+                            nodes['attribute'].append(childNode)
 
                 climb( childNode )
 
