@@ -309,10 +309,10 @@ def getGlobalsSettingsData( nodes ):
     for node in nodes:
         if node['__class'].value() == 'aov':
             for attr in node.knobs().keys():
-                if 'm_aov_name_' in attr and attr.getText():
+                if 'm_aov_name_' in attr and node[attr].getText():
                     count = attr.split('_')[-1]
                     channel = {
-                                'label'       : node['m_aov_name_%s'  %(count)].getText().replace('lpe:', ''),
+                                'label'       : node['m_aov_name_%s'  %(count)].getText().replace('lpe:', '').split(' ')[-1],
                                 'name'        : node['m_aov_name_%s'  %(count)].getText(),
                                 'lpe'         : node['m_aov_lpe_%s'   %(count)].getText(),
                                 'type'        : node['m_aov_depth_%s' %(count)].value(),
