@@ -1,0 +1,24 @@
+#! C:/Program Files/Nuke8.0v3/nuke-8.0.v3.dll -nx
+version 8.0 v3
+Gizmo {
+ tile_color 0xb2334cff
+ addUserKnob {20 Settings}
+ addUserKnob {22 addAOV l add T "import nuke\n\nn = nuke.thisNode()\n\ncount = 1\nfor i in n.knobs().keys():\n    if 'm_aov_name_' in i:\n        count += 1\n\ncount = str( count ).zfill(3)\n\nplug = nuke.EvalString_Knob('m_aov_name_%s' %(count), 'name', '')\nplug.setFlag(nuke.STARTLINE)\nn.addKnob(plug)\n\nplug = nuke.EvalString_Knob('m_aov_lpe_%s' %(count), 'lpe', '')\nplug.clearFlag( nuke.STARTLINE )\nn.addKnob(plug)\n\nplug = nuke.Enumeration_Knob('m_aov_depth_%s' %(count), '', \['half', 'float'])\nplug.clearFlag( nuke.STARTLINE )\nn.addKnob(plug)\n\n\n" +STARTLINE}
+ addUserKnob {20 Info}
+ addUserKnob {26 labelType l "" +STARTLINE T "type : "}
+ addUserKnob {26 __type l "" -STARTLINE T settings}
+ addUserKnob {26 labelClass l "" +STARTLINE T "class : "}
+ addUserKnob {26 __class l "" -STARTLINE T aov}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos 225
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 300
+ }
+end_group
